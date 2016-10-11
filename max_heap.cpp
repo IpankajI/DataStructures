@@ -37,6 +37,7 @@ void delHeapify(int in=1){
 void del(){
 	heap[1]=heap[index];
 	heap[index]=0;
+	index--;
 	delHeapify();
 }
 int main(){
