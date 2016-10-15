@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>		// only words of english lower case alphabates can be used
+#include<bits/stdc++.h>			// only words of english lower case alphabates can be used
 using namespace std;
 struct Node{
 	Node *childs[26];
@@ -76,7 +76,7 @@ void Trie::del(string str){
 			index[in]->leaf=false;
 		}
 		else{
-			while(index[in-1]->noOfChild==1){
+			while(index[in-1]->noOfChild==1 && index[in-1]->leaf==false){
 				index[in-1]->childs[str[in-1]-a]=NULL;
 				delete index[in];
 				in--;
