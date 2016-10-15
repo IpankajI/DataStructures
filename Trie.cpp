@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include<bits/stdc++.h>		// only words of english lower case alphabates can be used
 using namespace std;
 struct Node{
 	Node *childs[26];
