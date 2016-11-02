@@ -56,6 +56,10 @@ class List{
 			tmp=tmp.next;
 		}while(tmp!=root);
 		if(f) return;
+		if(tmp==root){
+			root=null;
+			return;
+		}
 		Node foo=tmp;
 		while(foo.next!=tmp) foo=foo.next;
 		foo.next=tmp.next;
@@ -69,12 +73,14 @@ public class circularLinkedList {
 		l.traverse();
 		System.out.println(l.search(100));
 		System.out.println(l.search(400));
-		l.del(100);
+		l.del(10);
 		l.add(55);
 		System.out.println(l.search(55));
 		System.out.println(l.search(400));
 		l.traverse();
 		l.del(55);
+		System.out.print("last\n");
 		l.traverse();
+		
 	}
 }
