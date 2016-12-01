@@ -7,79 +7,82 @@ class binaryTree:
     def __init__(self):
         self.root=None
     def add(self,x):
-        self.root=self.ADD(self.root,x)
-    def ADD(self,tmp,x):
-        if(tmp==None):
-            tmp=Node(x)
-            return tmp
-        if(x>tmp.data):
-            tmp.right=self.ADD(tmp.right,x)
-            return tmp
-        else:
-            tmp.left=self.ADD(tmp.left,x)
-            return tmp
+        def ADD(tmp,x):
+            if(tmp==None):
+                tmp=Node(x)
+                return tmp
+            if(x>tmp.data):
+                tmp.right=ADD(tmp.right,x)
+                return tmp
+            else:
+                tmp.left=ADD(tmp.left,x)
+                return tmp
+        self.root=ADD(self.root,x)
     def Traverse(self):
         tmp=self.root
-        self.traverse(tmp)
-    def traverse(self,tmp):
-        if(tmp==None):
-            return
-        self.traverse(tmp.left)
-        print(tmp.data)
-        self.traverse(tmp.right)
+        def traverse(tmp):
+            if(tmp==None):
+                return
+            traverse(tmp.left)
+            print(tmp.data)
+            traverse(tmp.right)
+        traverse(tmp)
     def delete(self,x):
-        self.root=self.HDelete(self.root,x)
-    def HDelete(self,node,x):
-        if(node==None):
-            return None
-        elif(node.data==x):
-            if(node.left==None and node.right==None):
-                del node
+        def HDelete(node,x):
+            if(node==None):
                 return None
-            elif(node.left!=None):
-                x=node.left
-                del node
-                return x
-            elif(node.right!=None):
-                x=node.right
-                del node
-                return x
-            else:
-                succ=node.right
-                while(succ.left!=None):
-                    succ=succ.left
-                node.data=succ.data
-                del succ
+            elif(node.data==x):
+                if(node.left==None and node.right==None):
+                    del node
+                    return None
+                elif(node.left!=None):
+                    x=node.left
+                    del node
+                    return x
+                elif(node.right!=None):
+                    x=node.right
+                    del node
+                    return x
+                else:
+                    succ=node.right
+                    while(succ.left!=None):
+                        succ=succ.left
+                    node.data=succ.data
+                    del succ
+                    return node
+            elif(node.data<x):
+                node=HDelete(node.right,x)
                 return node
-        elif(node.data<x):
-            node=self.HDelete(node.right,x)
-            return node
-        else:
-            node=self.HDelete(node.left,x)
-            return node
-
+            else:
+                node=HDelete(node.left,x)
+                return node
+        self.root=HDelete(self.root,x)
     def search(self,x):
         tmp=self.root
-        return self.BSearch(tmp,x)
-    def BSearch(self,tmp,x):
-        if(tmp==None):
-            return False
-        elif(tmp.data==x):
-            return True
-        elif(tmp.data<x):
-            return self.BSearch(tmp.right,x)
-        else:
-            return self.BSearch(tmp.left,x)
-
-
-
+        def BSearch(tmp,x):
+            if(tmp==None):
+                return False
+            elif(tmp.data==x):
+                return True
+            elif(tmp.data<x):
+                return BSearch(tmp.right,x)
+            else:
+                return BSearch(tmp.left,x)
+        return BSearch(tmp,x)
 bt=binaryTree()
 import random as rdm
-for i in range(1000):
-    x=rdm.randrange(-10000,10000)
+for i in range(10000):
+    x=rdm.randrange(-100000000,100000000)
     bt.add(x)
     if not bt.search(x):
         print("Bad implemetation")
-bt.Traverse()
+        break
+#bt.Traverse()
+for i in range(10000):
+    x=rdm.randrange(-100000000,100000000)
+    bt.delete(x)
+    if bt.search(x):
+        print("Bad implemetation")
+        break
 
 print("good implemetation!")
