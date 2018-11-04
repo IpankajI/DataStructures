@@ -42,7 +42,7 @@ void updateRange(int p, int q, int v, int n, ll bit1[], ll bit2[]){
 
 int main(){
 	ios::sync_with_stdio(0);
-	freopen("../input", "r", stdin);
+	// freopen("../input", "r", stdin);
 	int t;
 	ll bit1[N], bit2[N];
 	cin>>t;
